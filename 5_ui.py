@@ -1,6 +1,6 @@
 # gradio ui
 from dotenv import load_dotenv
-from smolagents import ToolCollection, CodeAgent, LiteLLMModel, GradioUI
+from smolagents import CodeAgent, LiteLLMModel, GradioUI
 import re
 import pandas as pd
 import time
@@ -29,7 +29,7 @@ def main():
     )
 
     # Manager agent orchestrates the workflow
-    manager_agent = CodeAgent(
+    agent = CodeAgent(
         tools=[],
         model=model,
         add_base_tools=True,
@@ -37,4 +37,7 @@ def main():
         additional_authorized_imports=["time", "pandas", "numpy"],
     )
 
-    GradioUI(manager_agent).launch()
+    GradioUI(agent).launch()
+
+if __name__ == '__main__':
+    main()
