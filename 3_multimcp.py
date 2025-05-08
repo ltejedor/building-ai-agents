@@ -1,6 +1,7 @@
-# adding mcp (replicate)
+# adding mcp (replicate and notion)
 from dotenv import load_dotenv
-from smolagents import ToolCollection, CodeAgent, LiteLLMModel
+from smolagents import CodeAgent, LiteLLMModel
+from mcpadapt.core import MCPAdapt
 from mcpadapt.smolagents_adapter import SmolAgentsAdapter
 from mcp import StdioServerParameters
 import re
@@ -9,12 +10,9 @@ import time
 import os
 
 load_dotenv()
-
-# Set up the MCP server parameters for mcp-replicate
-current_dir = os.path.dirname(os.path.abspath(__file__))
-mcp_dir = os.path.abspath(
-    os.path.join(current_dir, "mcp", "mcp-replicate")
-)
+# Create environment variables with your Notion integration secret
+notion_env = os.environ.copy()
+notion_env["OPENAPI_MCP_HEADERS"] = '{"Authorization": "Bearer ' + os.getenv('NOTION_INTEGRATION_ID') + '", "Notion-Version": "2022-06-28"}'
 
 class SafeNameAdapter(SmolAgentsAdapter):
     def adapt(self, func, tool):
@@ -27,6 +25,12 @@ def main():
     # Initialize the LLM model (Anthropic Claude)
     model = LiteLLMModel(model_id="anthropic/claude-3-7-sonnet-latest")
 
+    # Set up the MCP server parameters for mcp-replicate
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    mcp_dir = os.path.abspath(
+        os.path.join(current_dir, "mcp", "mcp-replicate")
+    )
+
     # Launch the mcp-replicate server using its built entrypoint (absolute path)
     script_path = os.path.join(mcp_dir, "build", "index.js")
     server_parameters = StdioServerParameters(
@@ -35,9 +39,17 @@ def main():
         env=os.environ.copy(),
     )
 
-    # Connect to the MCP server and retrieve tools exposed by mcp-replicate
-    with ToolCollection.from_mcp(server_parameters, trust_remote_code=True) as mcp_tool_collection:
-        data_tools = [*mcp_tool_collection.tools]
+    # Launch the notion MCP server using its CLI (requires OPENAPI_MCP_HEADERS in env)
+    notion_server_parameters = StdioServerParameters(
+        command="npx",
+        args=["-y", "@notionhq/notion-mcp-server"],
+        env=notion_env,
+    )
+    # Retrieve tools from both replicate and notion MCP servers, sanitizing names
+    with MCPAdapt(server_parameters, SafeNameAdapter()) as replicate_tool_list, \
+         MCPAdapt(notion_server_parameters, SafeNameAdapter()) as notion_tool_list:
+        # Combine and sanitize
+        data_tools = [*replicate_tool_list, *notion_tool_list]
         
 
         # Manager agent orchestrates the workflow

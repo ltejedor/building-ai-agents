@@ -1,1 +1,5 @@
 smolagents
+mcp
+mcpadapt
+python-dotenv
+pandas
