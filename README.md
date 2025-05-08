@@ -1,6 +1,4 @@
-# SmolAgents Agent-Building Tutorial
-
-A step-by-step tutorial demonstrating how to build and extend LLM-powered agents using the SmolAgents framework. Each Python script in this repository builds on the previous one, showing how to start with a basic agent, add custom tools, integrate with MCP servers, orchestrate multiple agents, and launch a Gradio UI.
+# Building AI Agents Workshop
 
 ## Prerequisites
 - Python 3.8 or higher
