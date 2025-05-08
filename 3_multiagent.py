@@ -1,4 +1,4 @@
-# adding mcp
+# multiagent# adding mcp
 from dotenv import load_dotenv
 from smolagents import ToolCollection, CodeAgent, LiteLLMModel
 from mcpadapt.smolagents_adapter import SmolAgentsAdapter
@@ -38,11 +38,28 @@ def main():
     with ToolCollection.from_mcp(server_parameters, trust_remote_code=True) as gs_tool_collection:
         data_tools = [*gs_tool_collection.tools]
 
-        # Manager agent orchestrates the workflow
-        agent = CodeAgent(
+        research_agent=CodeAgent(
             tools=data_tools,
             model=model,
             add_base_tools=True,
+            name="research_agent",
+            description="research and gather information from the internet and other sources",
+        )
+
+        persona_agent=CodeAgent(
+            tools=[],
+            model=model,
+            add_base_tools=True,
+            name="persona_agent",
+            description="act as a persona and provide responses based on the given context",
+        )
+
+        # Manager agent orchestrates the workflow
+        manager_agent = CodeAgent(
+            tools=data_tools,
+            model=model,
+            add_base_tools=True,
+            managed_agents=[research_agent, persona_agent],
             additional_authorized_imports=["time", "pandas", "numpy"],
         )
 
@@ -52,7 +69,7 @@ def main():
             if task.lower() in ['exit', 'quit']:
                 break
             try:
-                result = agent.run(task)
+                result = manager_agent.run(task)
                 print("\nManager response:\n", result)
             except Exception as e:
                 print(f"Error: {e}")
