@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 from smolagents import CodeAgent, LiteLLMModel
 
 load_dotenv()
- 
 
 def main():
     # Initialize the LLM model (Anthropic Claude)
@@ -13,7 +12,7 @@ def main():
     agent = CodeAgent(
         tools=[],
         model=model,
-        add_base_tools=False,
+        add_base_tools=True,
     )
 
     # Agent conversation

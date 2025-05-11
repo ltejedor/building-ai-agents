@@ -29,15 +29,15 @@ def main():
     )
 
     # Manager agent orchestrates the workflow
-    agent = CodeAgent(
+    manager_agent = CodeAgent(
         tools=[],
         model=model,
-        add_base_tools=True,
+        add_base_tools=False,
         managed_agents=[research_agent, persona_agent],
-        additional_authorized_imports=["time", "pandas", "numpy"],
+        additional_authorized_imports=[],
     )
 
-    GradioUI(agent).launch()
+    GradioUI(manager_agent).launch()
 
 if __name__ == '__main__':
     main()

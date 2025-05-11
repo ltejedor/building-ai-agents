@@ -1,6 +1,6 @@
 # multiagent
 from dotenv import load_dotenv
-from smolagents import ToolCollection, CodeAgent, LiteLLMModel
+from smolagents import CodeAgent, LiteLLMModel
 import re
 import pandas as pd
 import time
@@ -32,9 +32,9 @@ def main():
     manager_agent = CodeAgent(
         tools=[],
         model=model,
-        add_base_tools=True,
+        add_base_tools=False,
         managed_agents=[research_agent, persona_agent],
-        additional_authorized_imports=["time", "pandas", "numpy"],
+        additional_authorized_imports=[],
     )
 
     # Interactive REPL via manager
