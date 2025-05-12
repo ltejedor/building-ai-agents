@@ -3,3 +3,6 @@ mcp
 mcpadapt
 python-dotenv
 pandas
+selenium 
+helium 
+pillow
