@@ -6,3 +6,5 @@ pandas
 selenium 
 helium 
 pillow
+smolagents[litellm]
+duckduckgo-search
