@@ -1,4 +1,4 @@
-# SmolAgents Workshop: Building AI Agents Step-by-Step
+# Building AI Agents Workshop
 
 Welcome to the SmolAgents Workshop! This repository contains a series of progressive tutorials demonstrating how to build and extend LLM-powered agents using the SmolAgents framework. Each Python script builds upon the previous one, taking you from a basic agent to complex multi-agent systems with web UIs and external integrations.
 
