@@ -3,7 +3,7 @@
 .DS_Store
 __pycache__
 
-mcp/*
+mcp/**
 smolagents-ref
 .gradio
 
