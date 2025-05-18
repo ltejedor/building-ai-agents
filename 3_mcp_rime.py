@@ -1,4 +1,5 @@
 # adding mcp (rime) from https://github.com/MatthewDailey/rime-mcp
+# Will not work in Code Spaces - only locally
 from dotenv import load_dotenv
 from smolagents import CodeAgent, InferenceClientModel
 from mcpadapt.core import MCPAdapt
