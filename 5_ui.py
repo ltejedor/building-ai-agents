@@ -1,6 +1,6 @@
 # gradio ui
 from dotenv import load_dotenv
-from smolagents import CodeAgent, LiteLLMModel, GradioUI
+from smolagents import CodeAgent, InferenceClientModel, GradioUI
 import re
 import pandas as pd
 import time
@@ -10,7 +10,7 @@ load_dotenv()
 
 def main():
     # Initialize the LLM model (Anthropic Claude)
-    model = LiteLLMModel(model_id="anthropic/claude-3-7-sonnet-latest")
+    model = InferenceClientModel(model_id="Qwen/Qwen2.5-72B-Instruct")
 
     research_agent=CodeAgent(
         tools=[],

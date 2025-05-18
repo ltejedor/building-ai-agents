@@ -1,6 +1,6 @@
 # adding mcp (rime) from https://github.com/MatthewDailey/rime-mcp
 from dotenv import load_dotenv
-from smolagents import CodeAgent, LiteLLMModel
+from smolagents import CodeAgent, InferenceClientModel
 from mcpadapt.core import MCPAdapt
 from mcpadapt.smolagents_adapter import SmolAgentsAdapter
 from mcp import StdioServerParameters
@@ -20,7 +20,7 @@ class SafeNameAdapter(SmolAgentsAdapter):
 
 def main():
     # Initialize the LLM model (Anthropic Claude)
-    model = LiteLLMModel(model_id="anthropic/claude-3-7-sonnet-latest")
+    model = InferenceClientModel(model_id="Qwen/Qwen2.5-72B-Instruct")
 
     # Set up the MCP server parameters for Rime MCP
     # Update this to point to the Rime MCP location specified in your documentation

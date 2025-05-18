@@ -1,6 +1,6 @@
 # add custom tools
 from dotenv import load_dotenv
-from smolagents import CodeAgent, LiteLLMModel, tool
+from smolagents import CodeAgent, InferenceClientModel, tool
 import os
 
 load_dotenv()
@@ -31,7 +31,7 @@ def create_file(path: str, content: str) -> str:
 
 def main():
     # Initialize the LLM model (Anthropic Claude)
-    model = LiteLLMModel(model_id="anthropic/claude-3-7-sonnet-latest")
+    model = InferenceClientModel(model_id="Qwen/Qwen2.5-72B-Instruct")
 
     # Create agent
     agent = CodeAgent(

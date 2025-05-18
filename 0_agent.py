@@ -5,7 +5,7 @@ from smolagents import CodeAgent, InferenceClientModel
 load_dotenv()
 
 def main():
-    # Initialize the LLM model (Anthropic Claude)
+    # Initialize the LLM model
     model = InferenceClientModel(model_id="Qwen/Qwen2.5-72B-Instruct")
 
     # Create agent

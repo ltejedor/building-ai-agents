@@ -1,6 +1,6 @@
 # adding mcp (replicate)
 from dotenv import load_dotenv
-from smolagents import ToolCollection, CodeAgent, LiteLLMModel
+from smolagents import ToolCollection, CodeAgent, InferenceClientModel
 from mcpadapt.smolagents_adapter import SmolAgentsAdapter
 from mcp import StdioServerParameters
 import re
@@ -25,7 +25,7 @@ class SafeNameAdapter(SmolAgentsAdapter):
 
 def main():
     # Initialize the LLM model (Anthropic Claude)
-    model = LiteLLMModel(model_id="anthropic/claude-3-7-sonnet-latest")
+    model = InferenceClientModel(model_id="Qwen/Qwen2.5-72B-Instruct")
 
     # Launch the mcp-replicate server using its built entrypoint (absolute path)
     script_path = os.path.join(mcp_dir, "build", "index.js")

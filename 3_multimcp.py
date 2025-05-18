@@ -1,6 +1,6 @@
 # adding mcp (replicate and notion)
 from dotenv import load_dotenv
-from smolagents import CodeAgent, LiteLLMModel
+from smolagents import CodeAgent, InferenceClientModel
 from mcpadapt.core import MCPAdapt
 from mcpadapt.smolagents_adapter import SmolAgentsAdapter
 from mcp import StdioServerParameters
@@ -23,7 +23,7 @@ class SafeNameAdapter(SmolAgentsAdapter):
 
 def main():
     # Initialize the LLM model (Anthropic Claude)
-    model = LiteLLMModel(model_id="anthropic/claude-3-7-sonnet-latest")
+    model = InferenceClientModel(model_id="Qwen/Qwen2.5-72B-Instruct")
 
     # Set up the MCP server parameters for mcp-replicate
     current_dir = os.path.dirname(os.path.abspath(__file__))

@@ -20,7 +20,7 @@ def close_popups() -> str:
     webdriver.ActionChains(driver).send_keys(Keys.ESCAPE).perform()
 
 
-model = InferenceClientModel(model_id="meta-llama/Llama-3.3-70B-Instruct")
+model = InferenceClientModel(model_id="Qwen/Qwen2.5-72B-Instruct")
 agent = CodeAgent(tools=[go_back, close_popups], additional_authorized_imports=["helium"], model=model)
 
 agent.run("Navigate to the sundai club github repo and write an actionable tutorial from the latest project.")
