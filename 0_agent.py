@@ -1,4 +1,4 @@
-# starter code - 1 agentimport os
+# starter code 
 from dotenv import load_dotenv
 from smolagents import CodeAgent, LiteLLMModel
 

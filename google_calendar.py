@@ -1,6 +1,7 @@
-# adding mcp (replicate)
+# adding mcp (google calendar) from https://github.com/nspady/google-calendar-mcp
 from dotenv import load_dotenv
-from smolagents import ToolCollection, CodeAgent, LiteLLMModel
+from smolagents import CodeAgent, LiteLLMModel
+from mcpadapt.core import MCPAdapt
 from mcpadapt.smolagents_adapter import SmolAgentsAdapter
 from mcp import StdioServerParameters
 import re
@@ -9,12 +10,6 @@ import time
 import os
 
 load_dotenv()
-
-# Set up the MCP server parameters for mcp-replicate
-current_dir = os.path.dirname(os.path.abspath(__file__))
-mcp_dir = os.path.abspath(
-    os.path.join(current_dir, "mcp", "mcp-replicate")
-)
 
 class SafeNameAdapter(SmolAgentsAdapter):
     def adapt(self, func, tool):
@@ -27,7 +22,13 @@ def main():
     # Initialize the LLM model (Anthropic Claude)
     model = LiteLLMModel(model_id="anthropic/claude-3-7-sonnet-latest")
 
-    # Launch the mcp-replicate server using its built entrypoint (absolute path)
+    # Set up the MCP server parameters for google-calendar-mcp
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    mcp_dir = os.path.abspath(
+        os.path.join(current_dir, "mcp", "google-calendar-mcp")
+    )
+
+    # Launch the google-calendar-mcp server using its built entrypoint (absolute path)
     script_path = os.path.join(mcp_dir, "build", "index.js")
     server_parameters = StdioServerParameters(
         command="node",
@@ -35,17 +36,16 @@ def main():
         env=os.environ.copy(),
     )
 
-    # Connect to the MCP server and retrieve tools exposed by mcp-replicate
-    with ToolCollection.from_mcp(server_parameters) as mcp_tool_collection:
-        data_tools = [*mcp_tool_collection.tools]
+    # Retrieve tools from the Google Calendar MCP server, sanitizing names
+    with MCPAdapt(server_parameters, SafeNameAdapter()) as calendar_tool_list:
+        calendar_tools = [*calendar_tool_list]
         
-
         # Manager agent orchestrates the workflow
         agent = CodeAgent(
-            tools=data_tools,
+            tools=calendar_tools,
             model=model,
             add_base_tools=True,
-            additional_authorized_imports=["time", "pandas", "numpy"],
+            additional_authorized_imports=["time"],
         )
 
         # Interactive REPL via manager
@@ -61,4 +61,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
