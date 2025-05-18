@@ -60,12 +60,12 @@ cd building-ai-agents
 
 ### Step 2: Set Up Your API Keys
 
-Create a file named `.env` in the main folder and add your API keys:
+Create a file named `.env` in the main folder and add your API keys. Example at .env.example
 
 ```
-ANTHROPIC_API_KEY=your_anthropic_api_key
-NOTION_INTEGRATION_ID=your_notion_integration_token  # for tutorial #3
-HUGGINGFACE_API_KEY=your_hugging_face_api_key  # for tutorial #6
+HUGGINGFACEHUB_API_TOKEN=your_hf_token_here
+NOTION_API_KEY=""
+RIME_API_KEY=""
 ```
 
 > ⚠️ **Important**: Never share your API keys or commit them to public repositories!
