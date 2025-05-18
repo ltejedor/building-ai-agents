@@ -63,7 +63,7 @@ cd building-ai-agents
 Create a file named `.env` in the main folder and add your API keys. Example at .env.example
 
 ```
-HUGGINGFACEHUB_API_TOKEN=your_hf_token_here
+HF_TOKEN=your_hf_token_here
 NOTION_API_KEY=""
 RIME_API_KEY=""
 ```
