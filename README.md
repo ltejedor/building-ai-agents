@@ -83,22 +83,6 @@ This installs:
 - `mcp`: A protocol for connecting to external tools
 - Other helpful libraries for our projects
 
-### Step 4: Set Up External Tool Servers
-
-For tutorials #2 and beyond, you'll need these tool servers:
-
-**For Image Generation (MCP-Replicate)**:
-```bash
-cd mcp/mcp-replicate
-npm install
-npm run build
-cd ../../
-```
-
-**For Notion Integration**:
-```bash
-npm install -g @notionhq/notion-mcp-server
-```
 
 ## 🚀 Getting Started
 
