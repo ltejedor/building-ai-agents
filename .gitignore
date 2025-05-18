@@ -10,3 +10,4 @@ mcp/**
 smolagents-ref
 .gradio
 
+*.log
