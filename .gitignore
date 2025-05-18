@@ -4,6 +4,9 @@
 __pycache__
 
 mcp/**
+!mcp/
+!mcp/.gitkeep
+
 smolagents-ref
 .gradio
 
