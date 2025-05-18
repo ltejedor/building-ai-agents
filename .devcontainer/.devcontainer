@@ -2,27 +2,22 @@
   "name": "rime-python",
   "image": "mcr.microsoft.com/devcontainers/python:1-3.12",
 
-  // Optional features—FFmpeg lets you play or post-process the audio
   "features": {
     "ghcr.io/devcontainers/features/ffmpeg:1": {}
   },
 
-  // Install dependencies when the container is first created
   "postCreateCommand": "pip install --no-cache-dir requests pydub",
 
-  // VS Code tweaks that ship with the container
   "customizations": {
     "vscode": {
       "extensions": ["ms-python.python"]
     }
   },
 
-  // 1️⃣ Expose your secret inside the container
   "remoteEnv": {
     "RIME_API_KEY": "${localEnv:RIME_API_KEY}"
   },
 
-  // 2️⃣ Prompt anyone opening the repo to supply the secret
   "secrets": {
     "RIME_API_KEY": {
       "description": "Get yours at https://app.rime.ai → API Keys"
