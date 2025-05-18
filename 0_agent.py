@@ -1,18 +1,19 @@
 # starter code 
 from dotenv import load_dotenv
-from smolagents import CodeAgent, LiteLLMModel
+from smolagents import CodeAgent, InferenceClientModel
 
 load_dotenv()
 
 def main():
     # Initialize the LLM model (Anthropic Claude)
-    model = LiteLLMModel(model_id="anthropic/claude-3-7-sonnet-latest")
+    model = InferenceClientModel(model_id="Qwen/Qwen2.5-72B-Instruct")
 
     # Create agent
     agent = CodeAgent(
         tools=[],
         model=model,
-        add_base_tools=True,
+        #add_base_tools=True,
+        #additional_authorized_imports=["time", "pandas", "json"],
     )
 
     # Agent conversation
