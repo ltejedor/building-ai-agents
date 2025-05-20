@@ -48,7 +48,7 @@ def main():
             break
         try:
             result = agent.run(task)
-            print("\Agent response:\n", result)
+            print("\nAgent response:\n", result)
         except Exception as e:
             print(f"Error: {e}")
 
