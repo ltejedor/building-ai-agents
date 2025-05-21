@@ -2,6 +2,8 @@
 
 Welcome! This beginner-friendly workshop will teach you how to build AI assistants (agents) powered by large language models like Claude. You'll start with simple agents and gradually build more advanced features - no prior AI experience required!
 
+[Corresponding workshop slides](https://docs.google.com/presentation/d/1rjznY3Bc58CACxi6Qo2ayQj-tyIXWDTRDXK-OSGy1y8/edit?usp=sharing)
+
 ## 📚 What You'll Learn
 
 In this step-by-step workshop, you'll learn how to:
